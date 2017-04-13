@@ -2,7 +2,7 @@ from plumbum.cmd import gpg
 
 def encrypt(password, plainfile, outfile=None):
     if not outfile: outfile = plainfile + '.gpg'
-    gpg('--passphrase', password, '--output', outfile, '--yes', '-z', '6', '-c', plainfile)
+    gpg('--passphrase', password, '--output', outfile, '--yes', '--batch', '-z', '6', '-c', plainfile)
 
 def decrypt(password, gpgfile, outfile=None):
     if not outfile:
@@ -10,4 +10,4 @@ def decrypt(password, gpgfile, outfile=None):
             outfile = gpgfile[:-4]
         else:
             outfile = gpgfile + '.plain'
-    gpg('--passphrase', password, '--output', outfile, '--yes', '-d', gpgfile)
+    gpg('--passphrase', password, '--output', outfile, '--yes', '--batch', '-d', gpgfile)
